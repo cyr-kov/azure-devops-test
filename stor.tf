@@ -5,6 +5,8 @@ resource "azurerm_resource_group" "test_kov" {
 
 resource "azurerm_storage_account" "test_kov_sa" {
   name                     = "test_kov_sa"
+  account_tier = "Standart"
+  account_replication_type = "LRS"
   resource_group_name      = azurerm_resource_group.test_kov.name
   location                 = azurerm_resource_group.test_kov.location
   body = jsonencode({
@@ -39,7 +41,6 @@ resource "azurerm_storage_account" "test_kov_sa" {
       name = "Standard_LRS"
     }
   })
-  name      = "test_kov_sa"
   tags = {
     ms-resource-usage = "azure-cloud-shell"
   }
