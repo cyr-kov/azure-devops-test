@@ -43,6 +43,16 @@ resource "azurerm_storage_account" "test_kov_sa" {
     ms-resource-usage = "azure-cloud-shell"
   }
   type = "Microsoft.Storage/storageAccounts@2023-01-01"
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+resource "azurerm_storage_encryption_scope" "test_kov_enc" {
+  name               = "test_kov_enc"
+  storage_account_id = azurerm_storage_account.test_kov_sa.id
+  source             = "Microsoft.Storage/storageAccounts@2023-01-01"
 }
 
 resource "azurerm_storage_container" "test_kov_cn" {
