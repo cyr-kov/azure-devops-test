@@ -1,3 +1,20 @@
+provider "azurerm" {
+  features {
+  }
+}
+
+terraform {
+  backend "local" {}
+
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "3.77.0"
+
+    }
+  }
+}
+
 resource "azurerm_cdn_frontdoor_profile" "res-0" {
   name                     = "test2"
   resource_group_name      = "test1"
@@ -87,31 +104,5 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "res-8" {
 }
 resource "azurerm_private_dns_zone" "res-9" {
   name                = "privatelink.blob.core.windows.net"
-  resource_group_name = "test1"
-}
-resource "azurerm_private_dns_a_record" "res-10" {
-  name                = "test1stora"
-  records             = ["10.0.0.4"]
-  resource_group_name = "test1"
-  ttl                 = 3600
-  zone_name           = "privatelink.blob.core.windows.net"
-  depends_on = [
-    azurerm_private_dns_zone.res-9,
-  ]
-}
-resource "azurerm_private_dns_zone_virtual_network_link" "res-12" {
-  name                  = "i5zkf7ykevcm2"
-  private_dns_zone_name = "privatelink.blob.core.windows.net"
-  resource_group_name   = "test1"
-  virtual_network_id    = "/subscriptions/ba33ff92-2b4d-4947-bc72-810a41391e7e/resourceGroups/test1/providers/Microsoft.Network/virtualNetworks/test1_net"
-  depends_on = [
-    azurerm_private_dns_zone.res-9,
-    azurerm_virtual_network.res-13,
-  ]
-}
-resource "azurerm_virtual_network" "res-13" {
-  address_space       = ["10.0.0.0/16"]
-  location            = "eastus"
-  name                = "test1_net"
   resource_group_name = "test1"
 }
