@@ -51,8 +51,8 @@ resource "azurerm_cdn_frontdoor_route" "test_res_2" {
 }
 resource "azurerm_cdn_frontdoor_custom_domain" "test_kov_custdom" {
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.test_kov_profile.id
-  host_name                = "test1.kovtun.pro"
-  name                     = "test1-kovtun-pro-9574"
+  host_name                = var.host_name
+  name                     = var.cust_dom_name
   tls {
   }
   depends_on = [
