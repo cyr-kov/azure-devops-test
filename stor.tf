@@ -8,15 +8,22 @@ resource "azurerm_storage_account" "test_kov_sa" {
   account_tier = "Standart"
   account_replication_type = "LRS"
   resource_group_name      = azurerm_resource_group.test_kov.name
+  
   location                 = azurerm_resource_group.test_kov.location
+  
   account_kind = "StorageV2"
   cross_tenant_replication_enabled = false
   access_tier = "Hot"
   allow_nested_items_to_be_public = false
   min_tls_version = "TLS1_2"
+  enable_https_traffic_only = true
   is_hns_enabled = true
+  
   network_rules = {
-
+    default_action             = "Allow"
+    bypass              = "AzureServices"
+    ip_rules                   = []
+    virtual_network_subnet_ids = []
   }
     #   encryption = {
     #     keySource = "Microsoft.Storage"
@@ -31,14 +38,6 @@ resource "azurerm_storage_account" "test_kov_sa" {
     #       }
     #     }
     #   }
-    #  networkAcls = {
-    #     bypass              = "AzureServices"
-    #     defaultAction       = "Allow"
-    #     ipRules             = []
-    #     virtualNetworkRules = []
-    #   }
-    #   supportsHttpsTrafficOnly = true
-    # }
 
   tags = {
     ms-resource-usage = "azure-cloud-shell"
