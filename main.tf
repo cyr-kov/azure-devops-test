@@ -52,9 +52,9 @@ resource "azurerm_cdn_frontdoor_origin_group" "res-4" {
 resource "azurerm_cdn_frontdoor_origin" "res-5" {
   cdn_frontdoor_origin_group_id  = "/subscriptions/ba33ff92-2b4d-4947-bc72-810a41391e7e/resourceGroups/test1/providers/Microsoft.Cdn/profiles/test2/originGroups/default-origin-group"
   certificate_name_check_enabled = true
-  host_name                      = "csb100320036c8d8a4e.blob.core.windows.net"
+  host_name                      = "test_kov_sa.blob.core.windows.net"
   name                           = "default-origin"
-  origin_host_header             = "csb100320036c8d8a4e.blob.core.windows.net"
+  origin_host_header             = "test_kov_sa.blob.core.windows.net"
   weight                         = 1000
   depends_on = [
     azurerm_cdn_frontdoor_origin_group.res-4,
